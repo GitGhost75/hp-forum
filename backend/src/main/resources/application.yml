@@ -17,6 +17,11 @@ spring:
         format_sql: true
         jdbc:
           time_zone: UTC
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _aud
+
     hibernate:
       ddl-auto: validate
 
@@ -35,3 +40,5 @@ management:
 logging:
   level:
     org.springframework: info
+
+

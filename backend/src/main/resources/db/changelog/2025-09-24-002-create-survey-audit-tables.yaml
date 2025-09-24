@@ -1,0 +1,115 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-09-24-002-create-revision-table
+      author: codex
+      changes:
+        - createTable:
+            tableName: revinfo
+            columns:
+              - column:
+                  name: rev
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: revtstmp
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+        - createSequence:
+            sequenceName: revinfo_seq
+            startValue: 1
+            incrementBy: 1
+  - changeSet:
+      id: 2025-09-24-003-create-survey-audit-table
+      author: codex
+      changes:
+        - createTable:
+            tableName: survey_aud
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rev
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: revtype
+                  type: SMALLINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: survey_number
+                  type: VARCHAR(64)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: short_description
+                  type: VARCHAR(1024)
+              - column:
+                  name: long_description
+                  type: VARCHAR(8192)
+              - column:
+                  name: status
+                  type: VARCHAR(32)
+              - column:
+                  name: response_deadline
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: created_by_id
+                  type: UUID
+              - column:
+                  name: topic_id
+                  type: UUID
+              - column:
+                  name: survey_category_id
+                  type: UUID
+              - column:
+                  name: decision_key_id
+                  type: UUID
+              - column:
+                  name: total_amount_gross
+                  type: NUMERIC(15, 2)
+              - column:
+                  name: person_days
+                  type: INTEGER
+              - column:
+                  name: daily_rate_gross
+                  type: NUMERIC(12, 2)
+              - column:
+                  name: recurring_costs_gross_pa
+                  type: NUMERIC(15, 2)
+              - column:
+                  name: activation_date
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: closure_date
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: archive_date
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: extended_deadline
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+        - addPrimaryKey:
+            tableName: survey_aud
+            columnNames: id, rev
+            constraintName: pk_survey_aud
+        - addForeignKeyConstraint:
+            baseTableName: survey_aud
+            baseColumnNames: rev
+            referencedTableName: revinfo
+            referencedColumnNames: rev
+            constraintName: fk_survey_aud_revinfo
