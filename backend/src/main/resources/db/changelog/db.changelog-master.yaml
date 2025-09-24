@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: init-001
+      author: hp-forum
+      changes:
+        - sql:
+            splitStatements: true
+            sql: "-- add change sets here"
