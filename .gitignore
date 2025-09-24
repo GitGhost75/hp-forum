@@ -3,7 +3,7 @@
 .vscode
 
 # java
-target/
+target
 
 # dependencies
 node_modules
