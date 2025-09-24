@@ -1,5 +1,6 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "github.gitAuthentication": false,
-    "github.gitProtocol": "ssh"
+    "github.gitProtocol": "ssh",
+    "java.compile.nullAnalysis.mode": "disabled"
 }
