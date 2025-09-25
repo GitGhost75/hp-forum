@@ -1,6 +1,6 @@
-package de.csc.hpforum.survey.api;
+package de.csc.hpforum.survey.controller;
 
-import de.csc.hpforum.survey.api.dto.SurveyDto;
+import de.csc.hpforum.survey.model.dto.SurveyDto;
 import de.csc.hpforum.survey.service.SurveyService;
 import jakarta.validation.Valid;
 import java.net.URI;

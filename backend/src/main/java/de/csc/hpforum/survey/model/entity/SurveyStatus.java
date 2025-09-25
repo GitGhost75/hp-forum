@@ -1,4 +1,4 @@
-package de.csc.hpforum.survey.model;
+package de.csc.hpforum.survey.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

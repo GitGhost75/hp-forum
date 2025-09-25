@@ -1,7 +1,8 @@
 package de.csc.hpforum.survey.mapper;
 
-import de.csc.hpforum.survey.api.dto.SurveyDto;
-import de.csc.hpforum.survey.model.Survey;
+import de.csc.hpforum.survey.model.dto.SurveyDto;
+import de.csc.hpforum.survey.model.entity.Survey;
+
 import java.util.List;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Builder;

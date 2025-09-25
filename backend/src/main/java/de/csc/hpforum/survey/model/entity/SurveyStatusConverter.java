@@ -1,4 +1,4 @@
-package de.csc.hpforum.survey.model;
+package de.csc.hpforum.survey.model.entity;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

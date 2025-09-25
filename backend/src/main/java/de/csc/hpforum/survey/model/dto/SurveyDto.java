@@ -1,8 +1,9 @@
-package de.csc.hpforum.survey.api.dto;
+package de.csc.hpforum.survey.model.dto;
 
-import de.csc.hpforum.survey.model.SurveyStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import de.csc.hpforum.survey.model.entity.SurveyStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

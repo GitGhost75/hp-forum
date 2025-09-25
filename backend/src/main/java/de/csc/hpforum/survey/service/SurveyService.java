@@ -1,8 +1,8 @@
 package de.csc.hpforum.survey.service;
 
-import de.csc.hpforum.survey.api.dto.SurveyDto;
 import de.csc.hpforum.survey.mapper.SurveyMapper;
-import de.csc.hpforum.survey.model.Survey;
+import de.csc.hpforum.survey.model.dto.SurveyDto;
+import de.csc.hpforum.survey.model.entity.Survey;
 import de.csc.hpforum.survey.repository.SurveyRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
