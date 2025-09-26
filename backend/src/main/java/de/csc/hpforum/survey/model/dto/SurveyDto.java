@@ -44,6 +44,9 @@ public class SurveyDto {
     @NotNull
     private SurveyStatus status;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String statusDisplayText;
+
     private OffsetDateTime responseDeadline;
 
     // @NotNull

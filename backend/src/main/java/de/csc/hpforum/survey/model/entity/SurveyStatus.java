@@ -2,39 +2,29 @@ package de.csc.hpforum.survey.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Locale;
 
 public enum SurveyStatus {
-    DRAFT("draft"),
-    ACTIVE("active"),
-    ACTIVE_EXTENDED("active_extended"),
-    ACTIVE_OVERDUE("active_overdue"),
-    CLOSED("closed"),
-    COMPLETED("completed"),
-    CANCELLED("cancelled"),
-    ARCHIVED("archived");
-
-    private final String code;
-
-    SurveyStatus(String code) {
-        this.code = code;
-    }
+    DRAFT,
+    ACTIVE,
+    ACTIVE_EXTENDED,
+    ACTIVE_OVERDUE,
+    CLOSED,
+    COMPLETED,
+    CANCELLED,
+    ARCHIVED;
 
     @JsonValue
-    public String getCode() {
-        return code;
+    public String toJson() {
+        return name().toLowerCase(Locale.ROOT);
     }
 
     @JsonCreator
-    public static SurveyStatus fromCode(String code) {
-        if (code == null || code.isBlank()) {
+    public static SurveyStatus fromJson(String value) {
+        if (value == null || value.isBlank()) {
             return null;
         }
-        for (SurveyStatus status : values()) {
-            if (status.code.equalsIgnoreCase(code.trim())) {
-                return status;
-            }
-        }
-        throw new IllegalArgumentException("Unknown survey status code: " + code);
+        return SurveyStatus.valueOf(value.trim().toUpperCase(Locale.ROOT));
     }
 }
 
