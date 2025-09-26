@@ -2,37 +2,24 @@ package de.csc.hpforum.survey.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.UUID;
+
+import de.csc.hpforum.common.model.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.envers.AuditTable;
-import org.hibernate.envers.Audited;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Audited
-@AuditTable(value = "survey_aud")
 @Table(name = "survey")
-public class Survey {
-
-    @Id
-    @GeneratedValue
-    @UuidGenerator
-    @Column(columnDefinition = "uuid")
-    private UUID id;
+public class Survey extends BaseModel {
 
     @Column(name = "survey_number", nullable = false, unique = true, length = 64)
     private String surveyNumber;
@@ -51,9 +38,6 @@ public class Survey {
 
     @Column(name = "response_deadline")
     private OffsetDateTime responseDeadline;
-
-    @Column(name = "created_by_id", nullable = false, columnDefinition = "uuid")
-    private UUID createdById;
 
     @Column(name = "topic_id", nullable = false, columnDefinition = "uuid")
     private UUID topicId;
@@ -87,17 +71,4 @@ public class Survey {
 
     @Column(name = "extended_deadline")
     private OffsetDateTime extendedDeadline;
-
-    @Column(name = "created_at", nullable = false)
-    private OffsetDateTime createdAt;
-
-    @PrePersist
-    void onCreate() {
-        if (createdAt == null) {
-            createdAt = OffsetDateTime.now(ZoneOffset.UTC);
-        }
-    }
 }
-
-
-

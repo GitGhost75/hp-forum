@@ -19,8 +19,7 @@ public class SurveyService {
   private final SurveyMapper surveyMapper;
 
   public List<SurveyDto> findAll() {
-    List<Survey> entities = surveyRepository.findAll();
-    return surveyMapper.toDtoList(entities);
+    return surveyMapper.toDtoList(surveyRepository.findAll());
   }
 
   public Optional<SurveyDto> findById(UUID id) {
@@ -36,11 +35,9 @@ public class SurveyService {
 
   @Transactional
   public Optional<SurveyDto> update(UUID id, SurveyDto dto) {
-    return surveyRepository
-        .findById(id)
+    return surveyRepository.findById(id)
         .map(existing -> {
           surveyMapper.updateEntityFromDto(dto, existing);
-          existing.setId(id);
           Survey saved = surveyRepository.save(existing);
           return surveyMapper.toDto(saved);
         });
