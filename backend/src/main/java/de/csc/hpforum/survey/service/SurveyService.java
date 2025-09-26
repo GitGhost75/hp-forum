@@ -4,6 +4,7 @@ import de.csc.hpforum.survey.mapper.SurveyMapper;
 import de.csc.hpforum.survey.model.dto.SurveyDto;
 import de.csc.hpforum.survey.model.entity.Survey;
 import de.csc.hpforum.survey.model.entity.SurveyCategory;
+import de.csc.hpforum.survey.model.entity.SurveyStatus;
 import de.csc.hpforum.survey.repository.SurveyCategoryRepository;
 import de.csc.hpforum.survey.repository.SurveyRepository;
 import jakarta.transaction.Transactional;
@@ -13,6 +14,7 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +60,11 @@ public class SurveyService {
   private SurveyCategory resolveSurveyCategory(UUID categoryId) {
     return surveyCategoryRepository.findById(categoryId)
         .orElseThrow(() -> new EntityNotFoundException("SurveyCategory not found: " + categoryId));
+  }
+
+  public Set<SurveyStatus> getAllowedTransitions(UUID surveyId) {
+    Survey survey = surveyRepository.findById(surveyId)
+        .orElseThrow(() -> new EntityNotFoundException("Survey not found: " + surveyId));
+    return survey.getStatus().getAllowedTransitions();
   }
 }
