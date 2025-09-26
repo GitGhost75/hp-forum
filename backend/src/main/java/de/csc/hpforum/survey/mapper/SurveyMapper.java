@@ -28,14 +28,6 @@ public interface SurveyMapper {
     @Mapping(target = "version", ignore = true)
     Survey toEntity(SurveyDto dto);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdBy", ignore = true)
-    @Mapping(target = "createdDate", ignore = true)
-    @Mapping(target = "lastModifiedBy", ignore = true)
-    @Mapping(target = "lastModifiedDate", ignore = true)
-    @Mapping(target = "version", ignore = true)
-    Survey toNewEntity(SurveyDto dto);
-
     List<SurveyDto> toDtoList(List<Survey> entities);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -46,10 +38,16 @@ public interface SurveyMapper {
     @Mapping(target = "version", ignore = true)
     void updateEntityFromDto(SurveyDto dto, @MappingTarget Survey entity);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "createdDate", ignore = true)
+    @Mapping(target = "lastModifiedBy", ignore = true)
+    @Mapping(target = "lastModifiedDate", ignore = true)
+    @Mapping(target = "version", ignore = true)
+    Survey toNewEntity(SurveyDto dto);
+
     default UUID extractCreatedById(Survey entity) {
-        return entity.getCreatedBy()
-            .map(AuditUser::getUserId)
-            .orElse(null);
+        return entity.getCreatedBy().map(AuditUser::getUserId).orElse(null);
     }
 
     default OffsetDateTime extractCreatedAt(Survey entity) {

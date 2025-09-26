@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -28,6 +29,7 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Audited
 public abstract class BaseModel implements Auditable<AuditUser, UUID, OffsetDateTime> {
 
     @Id
@@ -42,10 +44,12 @@ public abstract class BaseModel implements Auditable<AuditUser, UUID, OffsetDate
     })
     @Embedded
     @CreatedBy
+    @Audited(withModifiedFlag = true)
     private AuditUser createdBy;
 
     @CreatedDate
     @Column(name = "created_at")
+    @Audited(withModifiedFlag = true)
     private OffsetDateTime createdDate;
 
     @AttributeOverrides({
@@ -54,23 +58,18 @@ public abstract class BaseModel implements Auditable<AuditUser, UUID, OffsetDate
     })
     @Embedded
     @LastModifiedBy
+    @Audited(withModifiedFlag = true)
     private AuditUser lastModifiedBy;
 
     @LastModifiedDate
     @Column(name = "last_modified_at")
+    @Audited(withModifiedFlag = true)
     private OffsetDateTime lastModifiedDate;
 
     @Version
     @Column(name = "version")
+    @Audited(withModifiedFlag = true)
     private Long version;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public boolean isNew() {
         return version == null;
@@ -90,29 +89,5 @@ public abstract class BaseModel implements Auditable<AuditUser, UUID, OffsetDate
 
     public Optional<OffsetDateTime> getLastModifiedDate() {
         return Optional.ofNullable(lastModifiedDate);
-    }
-
-    public void setCreatedBy(AuditUser createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public void setCreatedDate(OffsetDateTime creationDate) {
-        this.createdDate = creationDate;
-    }
-
-    public void setLastModifiedBy(AuditUser lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public void setLastModifiedDate(OffsetDateTime lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
     }
 }

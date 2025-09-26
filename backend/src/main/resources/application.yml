@@ -17,11 +17,10 @@ spring:
         format_sql: true
         jdbc:
           time_zone: UTC
-      org:
-        hibernate:
-          envers:
+      org.hibernate.envers:
             audit_table_suffix: _aud
-
+            store_data_at_delete: true
+            audit_strategy: org.hibernate.envers.strategy.DefaultAuditStrategy
     hibernate:
       ddl-auto: validate
 
