@@ -46,8 +46,8 @@ public class SurveyDto {
 
     private OffsetDateTime responseDeadline;
 
-    @NotNull
-    private UUID createdById;
+    // @NotNull
+    // private UUID createdById;
 
     @NotNull
     private UUID topicId;

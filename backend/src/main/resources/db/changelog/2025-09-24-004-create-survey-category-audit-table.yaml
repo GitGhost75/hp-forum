@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-09-24-004-create-survey-category-audit-table
+      author: codex
+      changes:
+        - createTable:
+            tableName: survey_category_aud
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rev
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: revtype
+                  type: SMALLINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(64)
+              - column:
+                  name: code_mod
+                  type: BOOLEAN
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: name_mod
+                  type: BOOLEAN
+              - column:
+                  name: description
+                  type: VARCHAR(2048)
+              - column:
+                  name: description_mod
+                  type: BOOLEAN
+              - column:
+                  name: created_by_user_id
+                  type: UUID
+              - column:
+                  name: created_by_username
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: last_modified_by_user_id
+                  type: UUID
+              - column:
+                  name: last_modified_by_username
+                  type: VARCHAR(255)
+              - column:
+                  name: last_modified_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: version
+                  type: BIGINT
+              - column:
+                  name: created_by_mod
+                  type: BOOLEAN
+              - column:
+                  name: created_date_mod
+                  type: BOOLEAN
+              - column:
+                  name: last_modified_by_mod
+                  type: BOOLEAN
+              - column:
+                  name: last_modified_date_mod
+                  type: BOOLEAN
+              - column:
+                  name: version_mod
+                  type: BOOLEAN
+        - addPrimaryKey:
+            tableName: survey_category_aud
+            columnNames: id, rev
+            constraintName: pk_survey_category_aud
+        - addForeignKeyConstraint:
+            baseTableName: survey_category_aud
+            baseColumnNames: rev
+            referencedTableName: revinfo
+            referencedColumnNames: rev
+            constraintName: fk_survey_category_aud_rev
+            onDelete: CASCADE

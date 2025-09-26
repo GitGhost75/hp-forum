@@ -3,6 +3,9 @@ package de.csc.hpforum.survey.model.entity;
 import de.csc.hpforum.common.model.BaseModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -43,8 +46,9 @@ public class Survey extends BaseModel {
     @Column(name = "topic_id", nullable = false, columnDefinition = "uuid")
     private UUID topicId;
 
-    @Column(name = "survey_category_id", nullable = false, columnDefinition = "uuid")
-    private UUID surveyCategoryId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "survey_category_id", nullable = false)
+    private SurveyCategory surveyCategory;
 
     @Column(name = "decision_key_id", columnDefinition = "uuid")
     private UUID decisionKeyId;

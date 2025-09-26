@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-09-24-005-update-survey-audit-table
+      author: codex
+      changes:
+        - addColumn:
+            tableName: survey_aud
+            columns:
+              - column:
+                  name: survey_category_mod
+                  type: BOOLEAN
