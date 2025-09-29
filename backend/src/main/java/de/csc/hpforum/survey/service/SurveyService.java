@@ -29,12 +29,12 @@ public class SurveyService {
   private final OrganizationRepository organizationRepository;
   private final SurveyMapper surveyMapper;
 
-  @Transactional()
+  @Transactional
   public List<SurveyDto> findAll() {
     return surveyMapper.toDtoList(surveyRepository.findAll());
   }
 
-  @Transactional()
+  @Transactional
   public Optional<SurveyDto> findById(UUID id) {
     return surveyRepository.findById(id).map(surveyMapper::toDto);
   }

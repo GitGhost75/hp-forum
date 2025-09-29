@@ -4,17 +4,16 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.MapperConfig;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.MappingInheritanceStrategy;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import de.csc.hpforum.common.model.BaseModel;
 
-@MapperConfig(mappingInheritanceStrategy = MappingInheritanceStrategy.AUTO_INHERIT_FROM_CONFIG)
+@MapperConfig(unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface BaseAuditMapperConfig {
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "createdDate", ignore = true)
     @Mapping(target = "lastModifiedBy", ignore = true)
     @Mapping(target = "lastModifiedDate", ignore = true)
     @Mapping(target = "version", ignore = true)
-    void ignoreAuditFields(@MappingTarget de.csc.hpforum.common.model.BaseModel target);
+    void ignoreAuditFields(BaseModel source, @MappingTarget BaseModel target);
 }

@@ -2,6 +2,7 @@ package de.csc.hpforum.organization.model.entity;
 
 import de.csc.hpforum.common.model.BaseModel;
 import de.csc.hpforum.survey.model.entity.SurveyOrganization;
+import de.csc.hpforum.user.model.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -43,4 +44,8 @@ public class Organization extends BaseModel {
     @NotAudited
     @OneToMany(mappedBy = "organization")
     private Set<SurveyOrganization> surveyOrganizations = new HashSet<>();
+
+    @NotAudited
+    @OneToMany(mappedBy = "organization")
+    private Set<User> users = new HashSet<>();
 }

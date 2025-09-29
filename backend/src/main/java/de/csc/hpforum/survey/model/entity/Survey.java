@@ -1,7 +1,6 @@
 package de.csc.hpforum.survey.model.entity;
 
 import de.csc.hpforum.common.model.BaseModel;
-import de.csc.hpforum.survey.model.entity.SurveyOrganization;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
