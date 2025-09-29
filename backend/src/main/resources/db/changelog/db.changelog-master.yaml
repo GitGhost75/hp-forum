@@ -9,3 +9,11 @@ databaseChangeLog:
       file: db/changelog/2025-09-24-004-create-survey-category-audit-table.yaml
   - include:
       file: db/changelog/2025-09-24-005-update-survey-audit-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-006-create-organization-category-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-007-create-organization-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-008-create-organization-category-audit-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-009-create-organization-audit-table.yaml

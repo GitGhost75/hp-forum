@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-09-24-007-create-organization-table
+      author: codex
+      changes:
+        - createTable:
+            tableName: organization
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: short_name
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: acn_client_number
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: organization_category_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by_user_id
+                  type: UUID
+              - column:
+                  name: created_by_username
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: last_modified_by_user_id
+                  type: UUID
+              - column:
+                  name: last_modified_by_username
+                  type: VARCHAR(255)
+              - column:
+                  name: last_modified_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: version
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: organization
+            baseColumnNames: organization_category_id
+            referencedTableName: organization_category
+            referencedColumnNames: id
+            constraintName: fk_organization_category
+            onDelete: RESTRICT
