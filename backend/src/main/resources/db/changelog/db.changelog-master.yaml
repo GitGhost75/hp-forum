@@ -9,3 +9,23 @@ databaseChangeLog:
       file: db/changelog/2025-09-24-004-create-survey-category-audit-table.yaml
   - include:
       file: db/changelog/2025-09-24-005-update-survey-audit-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-006-create-organization-category-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-007-create-organization-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-008-create-organization-category-audit-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-009-create-organization-audit-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-010-create-survey-organization-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-011-create-survey-organization-audit-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-012-create-role-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-013-create-role-audit-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-014-create-user-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-015-create-user-audit-table.yaml

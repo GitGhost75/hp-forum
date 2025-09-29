@@ -1,8 +1,8 @@
-package de.csc.hpforum.survey.mapper;
+package de.csc.hpforum.user.mapper;
 
 import de.csc.hpforum.common.mapper.BaseAuditMapperConfig;
-import de.csc.hpforum.survey.model.dto.SurveyCategoryDto;
-import de.csc.hpforum.survey.model.entity.SurveyCategory;
+import de.csc.hpforum.user.model.dto.RoleDto;
+import de.csc.hpforum.user.model.entity.Role;
 import java.util.List;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Builder;
@@ -12,18 +12,21 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true), config = BaseAuditMapperConfig.class)
-public interface SurveyCategoryMapper {
+public interface RoleMapper {
 
-    SurveyCategoryDto toDto(SurveyCategory entity);
+    RoleDto toDto(Role entity);
 
-    List<SurveyCategoryDto> toDtoList(List<SurveyCategory> entities);
-
-    @Mapping(target = "id", ignore = true)
-    SurveyCategory toEntity(SurveyCategoryDto dto);
+    List<RoleDto> toDtoList(List<Role> entities);
 
     @Mapping(target = "id", ignore = true)
-    SurveyCategory toNewEntity(SurveyCategoryDto dto);
+    @Mapping(target = "users", ignore = true)
+    Role toEntity(RoleDto dto);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "users", ignore = true)
+    Role toNewEntity(RoleDto dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntityFromDto(SurveyCategoryDto dto, @MappingTarget SurveyCategory entity);
+    @Mapping(target = "users", ignore = true)
+    void updateEntityFromDto(RoleDto dto, @MappingTarget Role entity);
 }

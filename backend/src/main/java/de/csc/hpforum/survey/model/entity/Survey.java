@@ -1,20 +1,25 @@
 package de.csc.hpforum.survey.model.entity;
 
 import de.csc.hpforum.common.model.BaseModel;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 @Getter
 @Setter
@@ -76,4 +81,21 @@ public class Survey extends BaseModel {
 
     @Column(name = "extended_deadline")
     private OffsetDateTime extendedDeadline;
+
+    @NotAudited
+    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<SurveyOrganization> surveyOrganizations = new HashSet<>();
+
+    public void addSurveyOrganization(SurveyOrganization surveyOrganization) {
+        surveyOrganizations.add(surveyOrganization);
+        surveyOrganization.setSurvey(this);
+    }
+
+    public void clearSurveyOrganizations() {
+        if (surveyOrganizations == null) {
+            return;
+        }
+        surveyOrganizations.forEach(link -> link.setSurvey(null));
+        surveyOrganizations.clear();
+    }
 }

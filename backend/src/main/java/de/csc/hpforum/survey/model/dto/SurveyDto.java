@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,14 +50,13 @@ public class SurveyDto {
 
     private OffsetDateTime responseDeadline;
 
-    // @NotNull
-    // private UUID createdById;
-
     @NotNull
     private UUID topicId;
 
     @NotNull
     private UUID surveyCategoryId;
+
+    private List<UUID> organizationIds;
 
     private UUID decisionKeyId;
 
