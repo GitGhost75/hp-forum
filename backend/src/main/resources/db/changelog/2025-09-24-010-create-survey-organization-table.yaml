@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-09-24-010-create-survey-organization-table
+      author: codex
+      changes:
+        - createTable:
+            tableName: survey_organization
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: survey_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: organization_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by_user_id
+                  type: UUID
+              - column:
+                  name: created_by_username
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: last_modified_by_user_id
+                  type: UUID
+              - column:
+                  name: last_modified_by_username
+                  type: VARCHAR(255)
+              - column:
+                  name: last_modified_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: version
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: survey_organization
+            baseColumnNames: survey_id
+            referencedTableName: survey
+            referencedColumnNames: id
+            constraintName: fk_survey_organization_survey
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: survey_organization
+            baseColumnNames: organization_id
+            referencedTableName: organization
+            referencedColumnNames: id
+            constraintName: fk_survey_organization_organization
+            onDelete: RESTRICT
+        - addUniqueConstraint:
+            tableName: survey_organization
+            columnNames: survey_id, organization_id
+            constraintName: uq_survey_organization_unique
