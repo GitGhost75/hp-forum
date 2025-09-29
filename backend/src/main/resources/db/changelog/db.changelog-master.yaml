@@ -1,8 +1,11 @@
 databaseChangeLog:
-  - changeSet:
-      id: init-001
-      author: hp-forum
-      changes:
-        - sql:
-            splitStatements: true
-            sql: "-- add change sets here"
+  - include:
+      file: db/changelog/2025-09-24-001-create-survey-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-002-create-survey-audit-tables.yaml
+  - include:
+      file: db/changelog/2025-09-24-003-create-survey-category-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-004-create-survey-category-audit-table.yaml
+  - include:
+      file: db/changelog/2025-09-24-005-update-survey-audit-table.yaml
